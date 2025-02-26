@@ -43,13 +43,19 @@ const Page = () => {
                 CNIC:
               </label>
               <input
-                type="cnic"
-                id="cnic"
-                value={cnic}
-                onChange={(e) => setCNIC(e.target.value)}
-                required
-                className="w-full p-2 border rounded"
-              />
+            type="text"
+            id="cnic"
+            value={cnic}
+            onChange={(e) => {
+              const value = e.target.value.replace(/\D/g, "");
+              if (value.length <= 13) {
+                setCNIC(value);
+              }
+            }}
+            required
+            className="w-full p-2 border rounded appearance-none"
+            maxLength={13}
+          />
             </div>
             <div>
               <label htmlFor="description" className="block mb-1">
