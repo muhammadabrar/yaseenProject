@@ -35,7 +35,7 @@ const Page = () => {
     return (
         <div className="container md:w-1/3 mx-auto p-4">
             <div>
-          <h2 className="text-2xl font-bold mb-4">Add New Item</h2>
+          <h2 className="text-2xl font-bold mb-4">Add Your CNIC</h2>
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

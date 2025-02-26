@@ -7,6 +7,7 @@ interface Item {
   _id: string;
   cnic: string;
   description: string;
+  createdAt: Date;
 }
 
 export default function Home() {
@@ -88,7 +89,7 @@ export default function Home() {
     <div className="container md:w-1/2 mx-auto p-4">
       <div className="">
         <div className="w-full">
-          <h2 className="text-2xl font-bold mb-4">Data Table</h2>
+          <h2 className="text-2xl font-bold mb-4">ALL CNIC's</h2>
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <div className="flex mb-4 items-center gap-3">
             <input
