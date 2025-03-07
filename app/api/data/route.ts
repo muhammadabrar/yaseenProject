@@ -41,13 +41,14 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get("id")
-
-  if (!id) {
-    return NextResponse.json({ error: "ID is required" }, { status: 400 })
-  }
-
   const client = await clientPromise
   const db = client.db("yaseenData")
+  if (!id) {
+    await db.collection("items").deleteMany({})
+    return NextResponse.json({ success: true, message: "All records deleted" })
+  }
+
+
 
   const result = await db.collection("items").deleteOne({ _id: new ObjectId(id) })
 

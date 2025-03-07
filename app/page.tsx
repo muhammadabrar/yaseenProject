@@ -38,10 +38,17 @@ export default function Home() {
     }
   }
 
-  const handleDelete = async (id: string): Promise<void> => {
+  const handleDelete = async (id?: string): Promise<void> => {
+    if (!id) {
+      const result = window.confirm(`Do you want to delete all data? total records ${items.length}`)
+      console.log(result);
+      
+      if (!result) return;
+    }
     setLoading(true)
+
     try {
-      const res = await fetch(`/api/data?id=${id}`, {
+      const res = await fetch(id? `/api/data?id=${id}`: `/api/data`, {
         method: "DELETE",
       })
       if (res.ok) {
@@ -89,7 +96,10 @@ export default function Home() {
     <div className="container md:w-1/2 mx-auto p-4">
       <div className="">
         <div className="w-full">
+          <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold mb-4">ALL CNIC's</h2>
+          <button className="px-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600" onClick={() => handleDelete()}>Delete ALL</button>
+          </div>
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <div className="flex mb-4 items-center gap-3">
             <input

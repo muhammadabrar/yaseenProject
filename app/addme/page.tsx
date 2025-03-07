@@ -14,7 +14,12 @@ const Page = () => {
     const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent) => {
+
       e.preventDefault()
+      if (cnic.length !== 13) {
+        setError("CNIC must be 13 digits")
+        return
+      }
       setError("")
       const res = await fetch("/api/data", {
         method: "POST",
@@ -36,7 +41,7 @@ const Page = () => {
         <div className="container md:w-1/3 mx-auto p-4">
             <div>
           <h2 className="text-2xl font-bold mb-4">Add Your CNIC</h2>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {error && <p className="text-red-500 mb-4 text-lg font-bold">{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="cnic" className="block mb-1">
@@ -55,6 +60,7 @@ const Page = () => {
             required
             className="w-full p-2 border rounded appearance-none"
             maxLength={13}
+            minLength={13}
           />
             </div>
             <div>
